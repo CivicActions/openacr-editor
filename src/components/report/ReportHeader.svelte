@@ -7,7 +7,7 @@
   import { reportFilename } from "../../utils/reportFilename.js";
   import { getCatalog } from "../../utils/getCatalogs.js";
 
-  $evaluation.title = $evaluation["product"]["name"] + " Accessibility Conformance Report";
+  $evaluation.title = "<span>" + $evaluation["product"]["name"] + "</span> Accessibility Conformance Report";
 
   export let download = false;
   let catalog = getCatalog($evaluation.catalog);
@@ -15,7 +15,8 @@
 
 <Header>{$evaluation.title}</Header>
 
-Based on {catalog.title}
+<p>Format: {catalog.title}</p>
+
 <HeaderWithAnchor id="name-of-product-version" level=2 {download}>Name of Product/Version</HeaderWithAnchor>
 {$evaluation["product"]["name"]} {#if $evaluation["product"]["version"]} {$evaluation["product"]["version"]}{/if}
 
@@ -43,7 +44,7 @@ Based on {catalog.title}
     {#if $evaluation["author"]["website"]}<li>Website: <a href="{$evaluation['author']['website']}" target="_blank">{$evaluation["author"]["website"]} <span class="visuallyhidden">(opens in a new window or tab)</span></a></li>{/if}
   </ul>
 {/if}
-{#if $evaluation["vendor"]}
+<!-- {#if $evaluation["vendor"]}
   <HeaderWithAnchor id="vendor" level=3 {download}>Vendor Information</HeaderWithAnchor>
   <ul>
     {#if $evaluation["vendor"]["name"]}<li>Name: {$evaluation["vendor"]["name"]}</li>{/if}
@@ -53,15 +54,15 @@ Based on {catalog.title}
     {#if $evaluation["vendor"]["phone"]}<li>Phone: {$evaluation["vendor"]["phone"]}</li>{/if}
     {#if $evaluation["vendor"]["website"]}<li>Website: <a href="{$evaluation['vendor']['website']}" target="_blank">{$evaluation["vendor"]["website"]} <span class="visuallyhidden">(opens in a new window or tab)</span></a></li>{/if}
   </ul>
-{/if}
+{/if} -->
 
-{#if $evaluation["notes"]}
+<!-- {#if $evaluation["notes"]}
   <HeaderWithAnchor id="notes" level=2 {download}>Notes</HeaderWithAnchor>
   {@html sanitizeMarkdown($evaluation["notes"])}
-{/if}
+{/if} -->
 
 {#if $evaluation["evaluation_methods_used"]}
-  <HeaderWithAnchor id="evaluation-methods" level=2 {download}>Evaluation Methods Used</HeaderWithAnchor>
+  <HeaderWithAnchor id="evaluation-methods" level=2 {download}>Evaluation Methods</HeaderWithAnchor>
   {@html sanitizeMarkdown($evaluation["evaluation_methods_used"])}
 {/if}
 
