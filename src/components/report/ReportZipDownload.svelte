@@ -181,7 +181,7 @@
     header img {
       max-width: 200px;
     }
-    header p {  
+    header p {
       margin: 0;
       text-align: right;
       color: #757575;
@@ -200,7 +200,7 @@
       }
       a.header-anchor,
       footer {
-        display: none; 
+        display: none;
       }
     }
   </style>
