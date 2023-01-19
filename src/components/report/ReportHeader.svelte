@@ -7,15 +7,16 @@
   import { reportFilename } from "../../utils/reportFilename.js";
   import { getCatalog } from "../../utils/getCatalogs.js";
 
-  $evaluation.title = "<span>" + $evaluation["product"]["name"] + "</span> Accessibility Conformance Report";
+  $evaluation.title = $evaluation["product"]["name"];
 
   export let download = false;
   let catalog = getCatalog($evaluation.catalog);
 </script>
 
-<Header>{$evaluation.title}</Header>
+<Header><span>{$evaluation.title}</span> Accessibility Conformance Report</Header>
 
-<p>Format: {catalog.title}</p>
+<p>Format: <b>VPAT 2.4Rev WCAG</b></p>
+<!-- <p>Format: {catalog.title}</p> -->
 
 <HeaderWithAnchor id="name-of-product-version" level=2 {download}>Name of Product/Version</HeaderWithAnchor>
 {$evaluation["product"]["name"]} {#if $evaluation["product"]["version"]} {$evaluation["product"]["version"]}{/if}
@@ -69,10 +70,10 @@
 <HeaderWithAnchor id="applicable-standards-guidelines" level=2 {download}>Applicable Standards/Guidelines</HeaderWithAnchor>
 This report covers the degree of conformance for the following accessibility standard/guidelines:
 
-<table class="usa-table">
+<table class="usa-table col2">
   <thead>
     <tr>
-      <th>Standard/Guideline</th>
+      <th style="width: 40%;">Standard/Guideline</th>
       <th>Included In Report</th>
     </tr>
   </thead>

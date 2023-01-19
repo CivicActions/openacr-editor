@@ -143,8 +143,11 @@ tr {
   page-break-inside: avoid;
   page-break-after: auto;
 }
-.usa-footer__secondary-section {
-  margin-top: 1rem;
+.usa-table:not(.col2) td:first-child {
+  width: 25%;
+}
+.usa-table:not(.col2) td:nth-child(2) {
+  width: 20%;
 }
 img {
   max-width: 100%;
@@ -174,7 +177,9 @@ header p {
   color: #757575;
   font-size: 0.9em;
 }
-
+a.header-anchor {
+  display: none;
+}
 @media print {
   .page-break {
     break-after: page;

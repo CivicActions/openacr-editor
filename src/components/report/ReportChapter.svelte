@@ -39,9 +39,22 @@
 
 <HeaderWithAnchor id={chapterId} level=3 {download}>{chapter.label}</HeaderWithAnchor>
 
-{#if $evaluation['chapters'][chapterId]['notes']}
+<div>
+  <p>
+    Conformance to the N WCAG Level A criteria listed below is
+    distributed as follows:
+  </p>
+  <ul>
+    <li>N criteria did not apply to the sample</li>
+    <li>N was not supported</li>
+    <li>N were partially supported</li>
+    <li>N were supported</li>
+  </ul>
+</div>
+
+<!-- {#if $evaluation['chapters'][chapterId]['notes']}
   Notes: {@html sanitizeMarkdown($evaluation['chapters'][chapterId]['notes'])}
-{/if}
+{/if} -->
 
 {#if $evaluation['chapters'][chapterId]['criteria'] && !$evaluation['chapters'][chapterId]['disabled'] }
   <table class="usa-table">
