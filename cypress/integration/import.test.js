@@ -17,6 +17,12 @@ describe("Import", () => {
       hardware: 0,
       software: 0,
       support_documentation_and_services: 4,
+      summary: 25,
+      summary_supports: 58,
+      summary_partially: 3,
+      summary_does_not_supports: 5,
+      summary_na: 34,
+      summary_ne: 0,
     },
     {
       filename: "govready-0.9.yaml",
@@ -32,6 +38,12 @@ describe("Import", () => {
       hardware: 0,
       software: 0,
       support_documentation_and_services: 4,
+      summary: 25,
+      summary_supports: 32,
+      summary_partially: 9,
+      summary_does_not_supports: 7,
+      summary_na: 52,
+      summary_ne: 0,
     },
   ];
 
@@ -128,7 +140,24 @@ describe("Import", () => {
           "contain",
           `Last Modified Date: ${yamlExample.lastModifiedDate}`
         )
-        .should("contain", `Version: ${yamlExample.version}`);
+        .should("contain", `Version: ${yamlExample.version}`)
+        .get('[id="success_criteria_level_a-summary"] p')
+        .should(
+          "contain",
+          `Conformance to the ${yamlExample.summary} criteria listed below is distributed as follows:`
+        )
+        .get('[id="success_criteria_level_a-summary"] li')
+        .should("contain", `${yamlExample.summary_supports} supports.`)
+        .should(
+          "contain",
+          `${yamlExample.summary_partially} partially supports.`
+        )
+        .should(
+          "contain",
+          `${yamlExample.summary_does_not_supports} does not support.`
+        )
+        .should("contain", `${yamlExample.summary_na} not applicable.`)
+        .should("contain", `${yamlExample.summary_ne} not evaluated.`);
 
       cy.get("@consoleError").should("not.be.called");
     });
