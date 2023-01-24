@@ -22,7 +22,6 @@ describe("Import", () => {
       summary_partially: 3,
       summary_does_not_supports: 5,
       summary_na: 34,
-      summary_ne: 0,
     },
     {
       filename: "govready-0.9.yaml",
@@ -43,7 +42,6 @@ describe("Import", () => {
       summary_partially: 9,
       summary_does_not_supports: 7,
       summary_na: 52,
-      summary_ne: 0,
     },
   ];
 
@@ -147,17 +145,16 @@ describe("Import", () => {
           `Conformance to the ${yamlExample.summary} criteria listed below is distributed as follows:`
         )
         .get('[id="success_criteria_level_a-summary"] li')
-        .should("contain", `${yamlExample.summary_supports} supports.`)
+        .should("contain", `${yamlExample.summary_supports} supported`)
         .should(
           "contain",
-          `${yamlExample.summary_partially} partially supports.`
+          `${yamlExample.summary_partially} partially supported`
         )
         .should(
           "contain",
-          `${yamlExample.summary_does_not_supports} does not support.`
+          `${yamlExample.summary_does_not_supports} not supported`
         )
-        .should("contain", `${yamlExample.summary_na} not applicable.`)
-        .should("contain", `${yamlExample.summary_ne} not evaluated.`);
+        .should("contain", `${yamlExample.summary_na} not applicable`);
 
       cy.get("@consoleError").should("not.be.called");
     });

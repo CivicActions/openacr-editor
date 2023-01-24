@@ -6,6 +6,7 @@
   import { sanitizeMarkdown } from "../../utils/sanitizeMarkdown.js";
   import { getProgressPerChapter } from "../../utils/getEvaluatedItems.js";
   import { getCatalog } from "../../utils/getCatalogs.js";
+  import termLabel from "../../data/termLabel.yaml";
 
   export let standard;
   export let chapterId;
@@ -55,7 +56,9 @@
     </p>
     <ul>
       {#each terms as term}
-        <li>{progressPerChapter[chapterId]['evaluated_by_term'][term.id]} {term.label.toLowerCase()}.</li>
+        {#if termLabel[term.id]}
+          <li>{progressPerChapter[chapterId]['evaluated_by_term'][term.id]} {termLabel[term.id]}</li>
+        {/if}
       {/each}
     </ul>
   </div>
