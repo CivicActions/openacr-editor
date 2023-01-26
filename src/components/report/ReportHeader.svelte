@@ -16,7 +16,6 @@
 <Header><span>{$evaluation.title}</span> Accessibility Conformance Report</Header>
 
 <p>Format: <b>VPAT 2.4Rev WCAG</b></p>
-<!-- <p>Format: {catalog.title}</p> -->
 
 <HeaderWithAnchor id="name-of-product-version" level=2 {download}>Name of Product/Version</HeaderWithAnchor>
 {$evaluation["product"]["name"]} {#if $evaluation["product"]["version"]} {$evaluation["product"]["version"]}{/if}

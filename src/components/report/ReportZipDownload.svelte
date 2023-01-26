@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { evaluation } from "../../stores/evaluation.js";
+  import ReportLetterheadCA from "./ReportLetterheadCA.svelte";
   import ReportHeader from "./ReportHeader.svelte";
   import ReportSummary from "./ReportSummary.svelte";
   import ReportChapters from "./ReportChapters.svelte";
@@ -159,7 +160,7 @@
     .usa-table:not(.col2) td:nth-child(2) {
       width: 20%;
     }
-    img {
+    img, svg {
       max-width: 100%;
     }
     header {
@@ -178,7 +179,8 @@
     header div:last-child {
       flex-grow: 1;
     }
-    header img {
+    header svg {
+      height: auto;
       max-width: 200px;
     }
     header p {
@@ -204,10 +206,7 @@
       }
     }
   </style>
-  <header>
-    <div><img src="../CA-Full-Logo-Red.svg" alt="CivicActions"></div>
-    <div><p>3527 Mt Diablo Blvd, #269, Lafayette, CA 94549</p></div>
-  </header>
+  <ReportLetterheadCA />
   <main>
     <div class="grid-container">
       <ReportHeader {download} />
