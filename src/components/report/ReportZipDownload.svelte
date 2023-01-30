@@ -133,7 +133,7 @@
       vertical-align: top;
       text-align: left;
     }
-    table ul, 
+    table ul,
     table ol {
       margin: 0;
       padding: 0;
