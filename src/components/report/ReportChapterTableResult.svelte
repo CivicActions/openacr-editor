@@ -48,7 +48,7 @@
       <ul>
         {#each criteria.components as component}
           {#if component.adherence.level}
-            <li>{@html catalogComponentLabel(catalogName, component.name, "html")}<p>{levelLabel(catalogName, component.adherence.level)}</p></li>
+            <li><!-- {@html catalogComponentLabel(catalogName, component.name, "html")} --><p>{levelLabel(catalogName, component.adherence.level)}</p></li>
           {/if}
         {/each}
       </ul>
@@ -59,7 +59,7 @@
       <ul>
         {#each criteria.components as component}
         {#if component.adherence.notes}
-          <li>{@html catalogComponentLabel(catalogName, component.name, "html")}{@html sanitizeMarkdown(component.adherence.notes)}</li>
+          <li><!-- {@html catalogComponentLabel(catalogName, component.name, "html")} -->{@html sanitizeMarkdown(component.adherence.notes)}</li>
           {/if}
         {/each}
       </ul>

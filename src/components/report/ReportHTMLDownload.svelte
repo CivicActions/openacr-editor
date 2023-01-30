@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { evaluation } from "../../stores/evaluation.js";
 
+  import ReportLetterheadCA from "./ReportLetterheadCA.svelte";
   import ReportHeader from "./ReportHeader.svelte";
   import ReportSummary from "./ReportSummary.svelte";
   import ReportChapters from "./ReportChapters.svelte";
@@ -34,84 +35,173 @@
 
 <div hidden use:cleanUp bind:this={htmlDownloadTemplate}>
   <style>
-    body#openACR {
-      padding-left: 35px;
-    }
-    h2,
-    h3 {
-      position: relative;
-    }
-    h2 a.header-anchor,
-    h3 a.header-anchor {
-      position: absolute;
-      left: -2rem;
-    }
-    h2 a.header-anchor:hover svg,
-    h2 a.header-anchor:focus svg,
-    h2 a.header-anchor:focus-within svg,
-    h3 a.header-anchor:hover svg,
-    h3 a.header-anchor:focus svg,
-    h3 a.header-anchor:focus-within svg {
-      fill: #0000EE;
-      opacity: 1;
-    }
-    h2 a.header-anchor svg,
-    h3 a.header-anchor svg {
-      width: 28px;
-      height: 28px;
-      opacity: .3;
-    }
-    @media all and (max-width: 63.99em) {
-      h2 a.header-anchor,
-      h3 a.header-anchor {
-        position:relative;
-        opacity: 1;
-        left: 0;
-        vertical-align: top
-      }
-    }
-    a.header-anchor {
-      opacity: 0.4;
-      font-size: small;
-      text-decoration: none;
-      position: relative;
-      /* left: 20px; */
-      -webkit-transition: opacity 1s, font-size 1s;
-      -moz-transition: opacity 1s, font-size 1s;
-      -o-transition: opacity 1s, font-size 1s;
-      transition: opacity 1s, font-size 1s;
-    }
-    a.header-anchor:focus,a.header-anchor:hover {
-      text-decoration: underline;
-      font-size: large;
-      opacity: 1
-    }
-    .visuallyhidden {
-      border: 0;
-      clip: rect(0 0 0 0);
-      clip-path: inset(50%);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-      white-space: nowrap;
-      &.focusable {
-          &:active,
-          &:focus {
-              clip: auto;
-              clip-path: none;
-              height: auto;
-              margin: 0;
-              overflow: visible;
-              position: static;
-              width: auto;
-              white-space: inherit;
-          }
-      }
-    }
+body,
+html {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+}
+body {
+  padding: 4vw;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+}
+h1 {
+  margin-top: 0;
+  font-size: 2.5rem;
+}
+h1 span {
+  display: block;
+  font-size: 0.8em;
+}
+h2,
+h3 {
+  position: relative;
+}
+h2 {
+  margin: 1.8rem 0 0.5rem;
+}
+h3 {
+  margin: 1rem 0 0.5rem;
+}
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: inherit;
+}
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  clip-path: none;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+  white-space: inherit;
+}
+p,
+li {
+  line-height: 1.4;
+  max-width: 40em;
+}
+li {
+  margin: 0.5rem 0;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+table,
+td,
+th {
+  border: 1px solid #3b3b3b;
+}
+td,
+th {
+  padding: 1em;
+  vertical-align: top;
+  text-align: left;
+}
+table ul, 
+table ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+table li {
+  margin: 0;
+}
+table li + li,
+table p + ol {
+  margin-top: 1rem;
+}
+table p {
+  margin-bottom: 0;
+}
+table li:first-child p {
+  margin: 0;
+}
+table {
+  page-break-inside: auto;
+}
+tr {
+  page-break-inside: avoid;
+  page-break-after: auto;
+}
+.usa-table:not(.col2) td:first-child {
+  width: 25%;
+}
+.usa-table:not(.col2) td:nth-child(2) {
+  width: 20%;
+}
+img, svg {
+  max-width: 100%;
+}
+header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 2px solid #00A398;
+  margin: 0 0 2rem;
+}
+header div {
+  padding: 0 0 .5rem;
+}
+header div:first-child {
+  flex-grow: 12;
+}
+header div:last-child {
+  flex-grow: 1;
+}
+header svg {
+  height: auto;
+  max-width: 200px;
+}
+header p {
+  margin: 0;
+  text-align: right;
+  color: #757575;
+  font-size: 0.9em;
+}
+a.header-anchor {
+  display: none;
+}
+@media print {
+  .page-break {
+    break-after: page;
+  }
+  .page-break + h2,
+  .page-break + h3 {
+    margin-top: 0;
+  }
+  a.header-anchor,
+  footer {
+    display: none;
+  }
+}
   </style>
+  <ReportLetterheadCA />
   <main>
     <div class="grid-container">
       <ReportHeader {download} />
