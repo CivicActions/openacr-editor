@@ -133,13 +133,18 @@
       vertical-align: top;
       text-align: left;
     }
-    table ul {
+    table ul, 
+    table ol {
       margin: 0;
       padding: 0;
       list-style: none;
     }
     table li {
       margin: 0;
+    }
+    table li + li,
+    table p + ol {
+      margin-top: 1rem;
     }
     table p {
       margin-bottom: 0;
