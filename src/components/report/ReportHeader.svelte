@@ -7,13 +7,13 @@
   import { reportFilename } from "../../utils/reportFilename.js";
   import { getCatalog } from "../../utils/getCatalogs.js";
 
-  $evaluation.title = $evaluation["product"]["name"] + " Accessibility Conformance Report";
+  $evaluation.title = $evaluation["product"]["name"];
 
   export let download = false;
   let catalog = getCatalog($evaluation.catalog);
 </script>
 
-<Header>{$evaluation.title}</Header>
+<Header><span id="evaluation-title">{$evaluation.title}</span> Accessibility Conformance Report</Header>
 
 Based on {catalog.title}
 <HeaderWithAnchor id="name-of-product-version" level=2 {download}>Name of Product/Version</HeaderWithAnchor>
