@@ -61,7 +61,7 @@ Based on {catalog.title}
 {/if}
 
 {#if $evaluation["evaluation_methods_used"]}
-  <HeaderWithAnchor id="evaluation-methods" level=2 {download}>Evaluation Methods Used</HeaderWithAnchor>
+  <HeaderWithAnchor id="evaluation-methods" level=2 {download}>Evaluation Methods</HeaderWithAnchor>
   {@html sanitizeMarkdown($evaluation["evaluation_methods_used"])}
 {/if}
 
