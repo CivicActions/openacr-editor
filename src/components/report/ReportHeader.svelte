@@ -84,9 +84,9 @@
 
 <div class="standards-section">
   <HeaderWithAnchor id="applicable-standards-guidelines" level=2 {download}>Applicable Standards/Guidelines</HeaderWithAnchor>
-  This report covers the degree of conformance for the following accessibility standard/guidelines:
 
-  <table class="usa-table">
+  <table class="usa-table applicable-standards-guidelines-table">
+    <caption>This report covers the degree of conformance for the following accessibility standard/guidelines:</caption>
     <thead>
       <tr>
         <th>Standard/Guideline</th>

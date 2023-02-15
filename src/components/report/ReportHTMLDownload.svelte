@@ -111,6 +111,12 @@
           }
       }
     }
+    .applicable-standards-guidelines-table th:nth-child(1) {
+      width: 40%;
+    }
+    .applicable-standards-guidelines-table th:nth-child(2) {
+      width: 60%;
+    }
   </style>
   <main>
     <div class="grid-container">
