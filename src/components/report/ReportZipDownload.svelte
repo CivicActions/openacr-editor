@@ -126,6 +126,10 @@
     .applicable-standards-guidelines-table th:nth-child(2) {
       width: 60%;
     }
+    /* If only one level then hide the label. */
+    .component-level-count-1 .component-level-label {
+      display: none;
+    }
   </style>
   <main>
     <div class="grid-container">
