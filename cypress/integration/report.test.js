@@ -172,7 +172,7 @@ describe("Report", () => {
 
     cy.get("button").contains("View Report").click();
 
-    cy.get("#success_criteria_level_aa-editor + p b").should(
+    cy.get("#success_criteria_level_aa-editor + div p b").should(
       "not.have.attr",
       "onclick"
     );
@@ -189,7 +189,7 @@ describe("Report", () => {
 
     cy.get("button").contains("View Report").click();
 
-    cy.get("#success_criteria_level_aaa-editor + p a")
+    cy.get("#success_criteria_level_aaa-editor + div p a")
       .should("have.attr", "href")
       .and("contains", "https://www.drupal.org/");
   });
