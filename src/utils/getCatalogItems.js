@@ -10,11 +10,17 @@ export function getCatalogChapter(catalogName, chapterId) {
   }
 }
 
-export function standardsIncluded(catalogName, standardChapters) {
+export function standardsIncluded(
+  catalogName,
+  standardChapters,
+  evaluationChapters
+) {
   const result = [];
   for (const standardChapter of standardChapters) {
     const catalogChapter = getCatalogChapter(catalogName, standardChapter);
-    result.push(`<li>${catalogChapter.label}</li>`);
+    if (!evaluationChapters[standardChapter].disabled) {
+      result.push(`<li>${catalogChapter.label}</li>`);
+    }
   }
   return sanitizeHtml(`<ul>${result.join("")}</ul>`);
 }
