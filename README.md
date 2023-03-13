@@ -69,4 +69,4 @@ The editor uses the OpenACR [schema](https://github.com/GSA/openacr/tree/main/sc
 
 ## License
 
-By default, this falls under a public domain license. Some libraries included here may include other licenses (see [licenses.txt](license/licenses.txt)). See our LICENSE.md file for more information.
+By default, this falls under a public domain license. Some libraries included here may include other licenses (see [licenses.txt](license/licenses.txt)). See our [LICENSE.md](LICENSE.md) file for more information.
