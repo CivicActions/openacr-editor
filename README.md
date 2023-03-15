@@ -68,4 +68,5 @@ The vars are now in the `vars` object, you can reference them with `vars.variabl
 The editor uses the OpenACR [schema](https://github.com/GSA/openacr/tree/main/schema) and [catalog](https://github.com/GSA/open-product-accessibility-template/tree/main/catalog) as data structures.
 
 ## License
+
 The licensing details are included in the LICENSE.md file.
