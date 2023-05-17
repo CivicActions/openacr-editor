@@ -18,7 +18,10 @@ export function standardsIncluded(
   const result = [];
   for (const standardChapter of standardChapters) {
     const catalogChapter = getCatalogChapter(catalogName, standardChapter);
-    if (!evaluationChapters[standardChapter].disabled) {
+    if (
+      !evaluationChapters[standardChapter].disabled ||
+      evaluationChapters[standardChapter].notes
+    ) {
       result.push(`<li>${catalogChapter.label}</li>`);
     }
   }
