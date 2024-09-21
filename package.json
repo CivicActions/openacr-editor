@@ -46,7 +46,7 @@
     "domelementtype": "2.2.0",
     "jszip": "^3.7.1",
     "marked": "4.0.12",
-    "sanitize-html": "2.7.0",
+    "sanitize-html": "2.12.1",
     "svelte-navigator": "^3.0.8"
   },
   "scripts": {
