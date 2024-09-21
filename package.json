@@ -14,7 +14,7 @@
     "@rollup/plugin-replace": "^2.3.3",
     "@rollup/plugin-yaml": "^3.1.0",
     "cross-env": "^7.0.2",
-    "cypress": "^9.7.0",
+    "cypress": "^13.14.2",
     "eslint": "^7.2.0",
     "eslint-plugin-svelte3": "^2.7.3",
     "license-checker-rseidelsohn": "^4.1.1",
