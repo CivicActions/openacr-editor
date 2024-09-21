@@ -3,5 +3,6 @@ public/build
 /public/index.html
 .vscode
 cypress/results
+cypress/downloads
 .nova
 .DS_Store
