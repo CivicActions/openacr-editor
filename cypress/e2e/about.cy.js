@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 describe("About", () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit("/about", {
       onBeforeLoad(win) {
         cy.stub(win.console, "error").as("consoleError");
