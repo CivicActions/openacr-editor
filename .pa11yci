@@ -6,7 +6,10 @@
     "ignore": [
       "color-contrast",
       "nested-interactive"
-    ]
+    ],
+    "chromeLaunchConfig": {
+      "args": ["--disable-dev-shm-usage", "--no-sandbox", "--disable-gpu"]
+    }
   },
   "urls": [
     "http://localhost:10001/",
