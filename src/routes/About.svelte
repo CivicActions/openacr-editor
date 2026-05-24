@@ -141,7 +141,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="select-catalog" level=2>Select report type and catalog</HeaderWithAnchor>
+    <HeaderWithAnchor id="select-catalog" level=2 showAnchor={false}>Select report type and catalog</HeaderWithAnchor>
   </summary>
   <p>{helpText["catalog"]["intro"]}</p>
   {#each catalogChoices as catalogChoice}
@@ -169,7 +169,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="product" level=2>Product</HeaderWithAnchor>
+    <HeaderWithAnchor id="product" level=2 showAnchor={false}>Product</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -204,7 +204,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="author" level=2>Author</HeaderWithAnchor>
+    <HeaderWithAnchor id="author" level=2 showAnchor={false}>Author</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -270,7 +270,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="vendor" level=2>Vendor</HeaderWithAnchor>
+    <HeaderWithAnchor id="vendor" level=2 showAnchor={false}>Vendor</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -336,7 +336,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="acr-report-details" level=2>ACR Report Details</HeaderWithAnchor>
+    <HeaderWithAnchor id="acr-report-details" level=2 showAnchor={false}>ACR Report Details</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -425,14 +425,19 @@
 
   <div class="field">
     <label for="evaluation-license">License</label>
-    <Select id="evaluation-license" inputStyles="border: 1px solid var(--grey);" items={spdxLicenses} value={$evaluation['license']} on:select={handleLicenseSelect} on:clear={handleLicenseClear} />
+    <Select id="evaluation-license" inputStyles="border: 1px solid var(--grey);" items={spdxLicenses} value={$evaluation['license']} on:select={handleLicenseSelect} on:clear={handleLicenseClear}>
+      <span slot="clear-icon">
+        <span aria-hidden="true">&times;</span>
+        <span class="visuallyhidden">Clear selected license</span>
+      </span>
+    </Select>
     <HelpText type="report" field="license" />
   </div>
 </details>
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="related-openacrs" level=2>Related OpenACRs</HeaderWithAnchor>
+    <HeaderWithAnchor id="related-openacrs" level=2 showAnchor={false}>Related OpenACRs</HeaderWithAnchor>
   </summary>
 
   <p>{helpText["related_openacrs"]["intro"]}</p>
@@ -446,7 +451,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="disabled-chapters" level=2>Disabled Chapters/Tables</HeaderWithAnchor>
+    <HeaderWithAnchor id="disabled-chapters" level=2 showAnchor={false}>Disabled Chapters/Tables</HeaderWithAnchor>
   </summary>
 
   <p>{helpText["disabled_chapters"]["intro"]}</p>
