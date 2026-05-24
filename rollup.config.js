@@ -8,7 +8,8 @@ import { terser } from "rollup-plugin-terser";
 import json from "@rollup/plugin-json";
 import yaml from "@rollup/plugin-yaml";
 import replace from "@rollup/plugin-replace";
-import typescript from "rollup-plugin-typescript";
+import typescript from "@rollup/plugin-typescript";
+import css from "rollup-plugin-css-only";
 
 const production = !process.env.ROLLUP_WATCH;
 const buildEnv = process.env.NODE_ENV || "development";
@@ -23,14 +24,12 @@ export default {
   },
   plugins: [
     svelte({
-      // enable run-time checks when not in production
-      dev: !production,
-      // we'll extract any component CSS out into
-      // a separate file — better for performance
-      css: (css) => {
-        css.write(`public/build/bundle.css`);
+      emitCss: true,
+      compilerOptions: {
+        dev: !production,
       },
     }),
+    css({ output: "public/build/bundle.css" }),
 
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In

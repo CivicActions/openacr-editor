@@ -47,6 +47,7 @@
     grid-column: 2 / span 6;
     -ms-grid-row: 2;
     -ms-grid-row-span: 2;
+    grid-row: 2;
     grid-row-start: 2;
   }
   .app-content--wide {
