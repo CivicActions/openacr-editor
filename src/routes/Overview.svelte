@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { Link, useLocation } from "svelte-navigator";
   import ExpandCollapseAll from "../components/ExpandCollapseAll.svelte";
   import Header from "../components/Header.svelte";
   import Pager from "../components/Pager.svelte";
@@ -10,14 +9,18 @@
   import { honourFragmentIdLinks } from "../utils/honourFragmentIdLinks.js";
   import { evaluation } from "../stores/evaluation.js";
   import { getCatalog } from "../utils/getCatalogs.js";
+  import { href, link, location } from "../lib/router.js";
 
-  const location = useLocation();
   let catalog = getCatalog($evaluation.catalog);
 
   onMount(() => {
     currentPage.update((currentPage) => "Overview");
 
-    honourFragmentIdLinks($location);
+    const unsubscribe = location.subscribe((currentLocation) => {
+      honourFragmentIdLinks(currentLocation);
+    });
+
+    return unsubscribe;
   });
 </script>
 
@@ -43,7 +46,7 @@
   </li>
   <li>
     As you use the editor, the
-    <Link to="report">Report</Link>
+    <a href={href("report")}>Report</a>
     page lists the success criteria that you have checked and not checked.
   </li>
   <li>

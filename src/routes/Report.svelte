@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { useLocation } from "svelte-navigator";
   import HeaderWithAnchor from "../components/HeaderWithAnchor.svelte";
   import ReportHeader from "../components/report/ReportHeader.svelte";
   import ReportSummary from "../components/report/ReportSummary.svelte";
@@ -13,14 +12,18 @@
   import { currentPage } from "../stores/currentPage.js";
   import { honourFragmentIdLinks } from "../utils/honourFragmentIdLinks.js";
   import { getCatalog } from "../utils/getCatalogs.js";
+  import { location } from "../lib/router.js";
 
-  const location = useLocation();
   let catalog = getCatalog($evaluation.catalog);
 
   onMount(() => {
-    currentPage.update(currentPage => "Report");
+    currentPage.update((currentPage) => "Report");
 
-    honourFragmentIdLinks($location);
+    const unsubscribe = location.subscribe((currentLocation) => {
+      honourFragmentIdLinks(currentLocation);
+    });
+
+    return unsubscribe;
   });
 </script>
 

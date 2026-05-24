@@ -1,17 +1,19 @@
 <script>
   import { onMount } from "svelte";
-  import { useLocation } from "svelte-navigator";
   import Header from "../components/Header.svelte";
   import HeaderWithAnchor from "../components/HeaderWithAnchor.svelte";
   import { currentPage } from "../stores/currentPage.js";
   import { honourFragmentIdLinks } from "../utils/honourFragmentIdLinks.js";
-
-  const location = useLocation();
+  import { location } from "../lib/router.js";
 
   onMount(() => {
-    currentPage.update(currentPage => "Acknowledgements");
+    currentPage.update((currentPage) => "Acknowledgements");
 
-    honourFragmentIdLinks($location);
+    const unsubscribe = location.subscribe((currentLocation) => {
+      honourFragmentIdLinks(currentLocation);
+    });
+
+    return unsubscribe;
   });
 </script>
 

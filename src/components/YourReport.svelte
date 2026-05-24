@@ -3,51 +3,48 @@
   import ProgressBar from "./ProgressBar.svelte";
   import ButtonShowHide from "./ButtonShowHide.svelte";
   import ReportNumbers from "./report/ReportNumbers.svelte";
-  import { navigate } from "svelte-navigator";
   import { evaluation } from "../stores/evaluation.js";
   import { currentPage } from "../stores/currentPage.js";
   import { showYourReport } from "../stores/showYourReport.js";
   import { importEvaluation } from "../utils/importEvaluation.js";
   import { getEvaluatedChapterCriteriaComponents, getChapterCriteriaComponents, getProgressPerChapter } from "../utils/getEvaluatedItems.js";
   import { getCatalog } from "../utils/getCatalogs.js";
-  import vars from "../../config/__buildEnv__.json";
+  import { goto } from "../lib/router.js";
 
   let fresh, box;
 
   function startNew() {
-    navigate(`${vars.pathPrefix}/about`, { replace: false });
+    goto("/about");
     fresh = false;
   }
 
   function toOverview() {
-    navigate(`${vars.pathPrefix}/report`, { replace: false });
+    goto("/report");
   }
 
   function clear() {
-    window.onbeforeunload = null;
+    //window.onbeforeunload = null;
     if (
       window.confirm(
-        "This will clear the current OpenACR and start a new one. Are you sure that's what you'd like to do?"
+        "This will clear the current OpenACR and start a new one. Are you sure that's what you'd like to do?",
       )
     ) {
       evaluation.clearCache();
-      navigate(`${vars.pathPrefix}/`, { replace: true });
+      goto("/", { replace: true });
     }
   }
 
   function toggleYourReport() {
-    showYourReport.update(v => (v = !v));
+    showYourReport.update((v) => (v = !v));
     box.focus();
   }
 
-  evaluation.subscribe(value => {
+  evaluation.subscribe((value) => {
     fresh = evaluation.isFresh();
   });
 
   $: fresh = evaluation.isFresh();
-  $: nameProvided =
-    $evaluation["product"] &&
-    $evaluation["product"]["name"];
+  $: nameProvided = $evaluation["product"] && $evaluation["product"]["name"];
   $: progressPerChapter = getProgressPerChapter($evaluation);
   $: evaluatedItems = getEvaluatedChapterCriteriaComponents($evaluation);
   $: totalCriteria = getChapterCriteriaComponents($evaluation);
