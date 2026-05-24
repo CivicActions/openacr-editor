@@ -74,7 +74,7 @@ describe("Report", () => {
     cy.visit("/about");
     cy.get("#evaluation-license")
       .type("creative commons")
-      .get(".listContainer")
+      .get(".svelte-select-list")
       .contains(
         "Creative Commons Attribution Share Alike 4.0 International (CC-BY-SA-4.0)"
       )
@@ -92,7 +92,7 @@ describe("Report", () => {
 
   it("should not show license header when license is cleared", () => {
     cy.visit("/about");
-    cy.get(".clearSelect").click();
+    cy.get(".clear-select").click();
 
     cy.get("button").contains("View Report").click();
 

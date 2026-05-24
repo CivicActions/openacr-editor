@@ -14,7 +14,6 @@
   import { evaluation } from "./stores/evaluation.js";
   import { getCatalog } from "./utils/getCatalogs.js";
   import { location } from "./lib/router.js";
-  export let url = "";
 
   const pagesWithYourReport = ["Overview", "About", "Evaluation"];
 

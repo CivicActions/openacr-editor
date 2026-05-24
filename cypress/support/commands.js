@@ -23,3 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('expectReportTotals', (completed, total) => {
+  cy.get(".your-report__description")
+    .invoke("text")
+    .then((text) => text.replace(/\s+/g, " ").trim())
+    .should("contain", `Reported on ${completed} of ${total} Total Criteria.`);
+});
