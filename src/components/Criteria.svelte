@@ -1,8 +1,8 @@
 <script>
   import HeaderWithAnchor from "./HeaderWithAnchor.svelte";
-  import { Link } from "svelte-navigator";
   import Component from "./Component.svelte";
   import LinkToGuidance from "./LinkToGuidance.svelte";
+  import { href, link } from "../lib/router.js";
   export let chapterId;
   export let chapterLink;
   export let id;
@@ -12,7 +12,9 @@
   import { evaluation } from "../stores/evaluation.js";
 
   $: linkToImplementing = `${chapterLink}#${alt_id}`;
-  $: disabled = ($evaluation['chapters'][chapterId]['disabled']) ? 'disabled' : '';
+  $: disabled = $evaluation["chapters"][chapterId]["disabled"]
+    ? "disabled"
+    : "";
 </script>
 
 <style>
@@ -30,13 +32,11 @@
 <div {id} class="criteria">
   <details>
     <summary>
-      <HeaderWithAnchor id="{id}" level=2>{id}: {handle}</HeaderWithAnchor>
+      <HeaderWithAnchor id="{id}" level=2 showAnchor={false}>{id}: {handle}</HeaderWithAnchor>
     </summary>
     {#if !disabled}
       <span class="observation__meta">
-        <Link to={`/report#${alt_id}-editor`}>
-          View in Report
-        </Link>
+        <a href={href(`report#${alt_id}-editor`)}>View in Report</a>
       </span>
     {/if}
     <LinkToGuidance href={linkToImplementing}>Implementing {id}: {handle}</LinkToGuidance>

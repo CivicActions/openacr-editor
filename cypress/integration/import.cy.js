@@ -81,10 +81,7 @@ describe("Import", () => {
         `Report for ${yamlExample.reportname}`
       );
 
-      cy.get(".your-report__description").should(
-        "contain",
-        `Reported on\n  ${yamlExample.total}\n  of\n  339\n  Total Criteria.`
-      );
+      cy.expectReportTotals(yamlExample.total, 339);
 
       cy.get(
         ".progress__principle a[href$='/chapter/success_criteria_level_a'] + .progress__part"

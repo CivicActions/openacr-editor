@@ -1,15 +1,17 @@
 {
   "defaults": {
+    "chromeLaunchConfig": {
+      "args": [
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
+      ]
+    },
     "concurrency": 1,
     "standard": "WCAG2AA",
     "runners": ["axe"],
     "ignore": [
-      "color-contrast",
-      "nested-interactive"
-    ],
-    "chromeLaunchConfig": {
-      "args": ["--disable-dev-shm-usage", "--no-sandbox", "--disable-gpu"]
-    }
+      "color-contrast"
+    ]
   },
   "urls": [
     "http://localhost:10001/",

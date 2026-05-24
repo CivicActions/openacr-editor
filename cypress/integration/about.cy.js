@@ -25,17 +25,17 @@ describe("About", () => {
   it("license dropdown is searchaeble", () => {
     cy.get("#evaluation-license")
       .type("creative commons")
-      .get(".listContainer")
+      .get(".svelte-select-list")
       .contains(
         "Creative Commons Attribution Share Alike 4.0 International (CC-BY-SA-4.0)"
       )
       .click()
-      .get(".selectedItem")
+      .get(".selected-item")
       .should("contain", "CC-BY-SA-4.0");
   });
 
   it("license dropdown is clearable", () => {
-    cy.get(".clearSelect").click().get(".selectedItem").should("not.exist");
+    cy.get(".clear-select").click().get(".selected-item").should("not.exist");
   });
 
   it("add and remove related OpenACRs", () => {
@@ -77,9 +77,6 @@ describe("About", () => {
       ".progress__principle a[href$='/chapter/software'] + .progress__part"
     ).should("not.exist");
 
-    cy.get(".your-report__description").should(
-      "contain",
-      `Reported on\n  0\n  of\n  326\n  Total Criteria.`
-    );
+    cy.expectReportTotals(0, 326);
   });
 });

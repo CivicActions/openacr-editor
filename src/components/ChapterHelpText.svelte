@@ -1,5 +1,5 @@
 <script>
-  import { link } from "svelte-navigator";
+  import { href, link } from "../lib/router.js";
   export let chapterId;
 
   function openFirstAccordion() {

@@ -1,11 +1,27 @@
 <script>
-  import vars from "../../config/__buildEnv__.json";
+  import { assetPath } from "../lib/base.js";
 
   export let id;
   export let download = false;
 
   const extraId = download ? "-download" : "-editor";
 </script>
+
+<dt id="{id}{extraId}">
+  <slot />
+  <a
+    href="#{id}{extraId}"
+    class="header-anchor"
+    aria-labelledby="{id}{extraId}"
+  >
+    <span class="anchor-icon" aria-hidden="true">
+      <svg focusable="false" aria-hidden="true" class="icon-link">
+        <use href={assetPath("/images/icons.svg#link")} />
+      </svg>
+    </span>
+    <span class="visuallyhidden">Anchor link</span>
+  </a>
+</dt>
 
 <style>
   dt {
@@ -51,18 +67,3 @@
     opacity: 1
   }
 </style>
-
-<dt id="{id}{extraId}">
-  <slot />
-  <a href="#{id}{extraId}" class="header-anchor" aria-labelledby="{id}{extraId}">
-    <span class="anchor-icon" aria-hidden="true">
-      <svg
-        focusable="false"
-        aria-hidden="true"
-        class="icon-link">
-        <use href={`${vars.pathPrefix}/images/icons.svg#link`} />
-      </svg>
-    </span>
-    <span class="visuallyhidden">Anchor link</span>
-  </a>
-</dt>

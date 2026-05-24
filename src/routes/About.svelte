@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { useLocation } from "svelte-navigator";
   import Header from "../components/Header.svelte";
   import Pager from "../components/Pager.svelte";
   import HelpText from "../components/HelpText.svelte";
@@ -19,67 +18,78 @@
   import { reportFilename } from "../utils/reportFilename.js";
   import { getCatalog, getListOfCatalogs } from "../utils/getCatalogs.js";
   import { updateEvaluation } from "../utils/updateEvaluation.js";
+  import { location } from "../lib/router.js";
 
-  const location = useLocation();
   let catalog = getCatalog($evaluation.catalog);
   let catalogChoices = getListOfCatalogs();
   let selectedCatalog = $evaluation.catalog;
 
   onMount(() => {
-    currentPage.update(currentPage => "About");
+    currentPage.update((currentPage) => "About");
 
-    honourFragmentIdLinks($location);
+    const unsubscribe = location.subscribe((currentLocation) => {
+      honourFragmentIdLinks(currentLocation);
+    });
+
+    return unsubscribe;
   });
 
   let spdxLicenses = [];
   for (const spdexLicenseListItem in spdxLicenseList) {
     spdxLicenses.push({
       value: spdexLicenseListItem,
-      label: `${spdxLicenseList[spdexLicenseListItem].name} (${spdexLicenseListItem})`
+      label: `${spdxLicenseList[spdexLicenseListItem].name} (${spdexLicenseListItem})`,
     });
   }
   spdxLicenses.push({
-    value: 'Invalid',
-    label: 'Invalid License'
+    value: "Invalid",
+    label: "Invalid License",
   });
   spdxLicenses.sort((a, b) => {
     let la = a.label.toLowerCase(),
-        lb = b.label.toLowerCase();
+      lb = b.label.toLowerCase();
 
     if (la < lb) {
-        return -1;
+      return -1;
     }
     if (la > lb) {
-        return 1;
+      return 1;
     }
     return 0;
   });
 
   function handleLicenseSelect(e) {
-    $evaluation['license'] = e.detail.value;
+    $evaluation["license"] = e.detail.value;
     evaluation.updateCache($evaluation);
   }
 
   function handleLicenseClear(e) {
-    $evaluation['license'] = "";
+    $evaluation["license"] = "";
     evaluation.updateCache($evaluation);
   }
 
   function handleRelatedAdd() {
     const newRelatedOpenACR = {
       url: "",
-      type: "primary"
+      type: "primary",
     };
 
-    $evaluation['related_openacrs'] = [...$evaluation['related_openacrs'], newRelatedOpenACR];
+    $evaluation["related_openacrs"] = [
+      ...$evaluation["related_openacrs"],
+      newRelatedOpenACR,
+    ];
     evaluation.updateCache($evaluation);
   }
 
   function handleRelatedDelete(e) {
-    if (window.confirm("Are you sure you would like to delete this related OpenACR?")) {
-      const newValue = $evaluation['related_openacrs'];
+    if (
+      window.confirm(
+        "Are you sure you would like to delete this related OpenACR?",
+      )
+    ) {
+      const newValue = $evaluation["related_openacrs"];
       newValue.splice(e.detail, 1);
-      $evaluation['related_openacrs'] = newValue;
+      $evaluation["related_openacrs"] = newValue;
       evaluation.updateCache($evaluation);
     }
   }
@@ -91,16 +101,16 @@
   function confirmCatalogChange(e) {
     if (
       window.confirm(
-        "Switching catalogs may remove entered data and notes from your ACR that are not part of the newly selected catalog.\n\nPlease download your report before switching catalogs to avoid losing information. Select Cancel to save before switching."
+        "Switching catalogs may remove entered data and notes from your ACR that are not part of the newly selected catalog.\n\nPlease download your report before switching catalogs to avoid losing information. Select Cancel to save before switching.",
       )
     ) {
-      $evaluation['catalog'] = selectedCatalog;
+      $evaluation["catalog"] = selectedCatalog;
       updateEvaluation(selectedCatalog, $evaluation);
     }
   }
 
   function resetCatalogChange() {
-    selectedCatalog = $evaluation['catalog'];
+    selectedCatalog = $evaluation["catalog"];
   }
 
   $: versionPrefix = reportFilename($evaluation, false);
@@ -131,7 +141,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="select-catalog" level=2>Select report type and catalog</HeaderWithAnchor>
+    <HeaderWithAnchor id="select-catalog" level=2 showAnchor={false}>Select report type and catalog</HeaderWithAnchor>
   </summary>
   <p>{helpText["catalog"]["intro"]}</p>
   {#each catalogChoices as catalogChoice}
@@ -159,7 +169,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="product" level=2>Product</HeaderWithAnchor>
+    <HeaderWithAnchor id="product" level=2 showAnchor={false}>Product</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -194,7 +204,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="author" level=2>Author</HeaderWithAnchor>
+    <HeaderWithAnchor id="author" level=2 showAnchor={false}>Author</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -260,7 +270,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="vendor" level=2>Vendor</HeaderWithAnchor>
+    <HeaderWithAnchor id="vendor" level=2 showAnchor={false}>Vendor</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -326,7 +336,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="acr-report-details" level=2>ACR Report Details</HeaderWithAnchor>
+    <HeaderWithAnchor id="acr-report-details" level=2 showAnchor={false}>ACR Report Details</HeaderWithAnchor>
   </summary>
 
   <div class="field">
@@ -415,14 +425,19 @@
 
   <div class="field">
     <label for="evaluation-license">License</label>
-    <Select id="evaluation-license" inputStyles="border: 1px solid var(--grey);" items={spdxLicenses} value={$evaluation['license']} on:select={handleLicenseSelect} on:clear={handleLicenseClear} />
+    <Select id="evaluation-license" inputStyles="border: 1px solid var(--grey);" items={spdxLicenses} value={$evaluation['license']} on:select={handleLicenseSelect} on:clear={handleLicenseClear}>
+      <span slot="clear-icon">
+        <span aria-hidden="true">&times;</span>
+        <span class="visuallyhidden">Clear selected license</span>
+      </span>
+    </Select>
     <HelpText type="report" field="license" />
   </div>
 </details>
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="related-openacrs" level=2>Related OpenACRs</HeaderWithAnchor>
+    <HeaderWithAnchor id="related-openacrs" level=2 showAnchor={false}>Related OpenACRs</HeaderWithAnchor>
   </summary>
 
   <p>{helpText["related_openacrs"]["intro"]}</p>
@@ -436,7 +451,7 @@
 
 <details open>
   <summary>
-    <HeaderWithAnchor id="disabled-chapters" level=2>Disabled Chapters/Tables</HeaderWithAnchor>
+    <HeaderWithAnchor id="disabled-chapters" level=2 showAnchor={false}>Disabled Chapters/Tables</HeaderWithAnchor>
   </summary>
 
   <p>{helpText["disabled_chapters"]["intro"]}</p>

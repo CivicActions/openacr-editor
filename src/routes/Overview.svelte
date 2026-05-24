@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { Link, useLocation } from "svelte-navigator";
   import ExpandCollapseAll from "../components/ExpandCollapseAll.svelte";
   import Header from "../components/Header.svelte";
   import Pager from "../components/Pager.svelte";
@@ -10,14 +9,18 @@
   import { honourFragmentIdLinks } from "../utils/honourFragmentIdLinks.js";
   import { evaluation } from "../stores/evaluation.js";
   import { getCatalog } from "../utils/getCatalogs.js";
+  import { href, link, location } from "../lib/router.js";
 
-  const location = useLocation();
   let catalog = getCatalog($evaluation.catalog);
 
   onMount(() => {
     currentPage.update((currentPage) => "Overview");
 
-    honourFragmentIdLinks($location);
+    const unsubscribe = location.subscribe((currentLocation) => {
+      honourFragmentIdLinks(currentLocation);
+    });
+
+    return unsubscribe;
   });
 </script>
 
@@ -43,7 +46,7 @@
   </li>
   <li>
     As you use the editor, the
-    <Link to="report">Report</Link>
+    <a href={href("report")}>Report</a>
     page lists the success criteria that you have checked and not checked.
   </li>
   <li>
@@ -60,7 +63,7 @@
 
 <details>
   <summary>
-    <HeaderWithAnchor id="about-openacr" level=2>About OpenACR</HeaderWithAnchor>
+    <HeaderWithAnchor id="about-openacr" level=2 showAnchor={false}>About OpenACR</HeaderWithAnchor>
   </summary>
   <p>
     OpenACR is a digital native Accessibility Conformance Report (ACR). The initial development is based on Section 508 requirements.
@@ -84,7 +87,7 @@
 
 <details>
   <summary>
-    <HeaderWithAnchor id="structure-of-this-tool" level=2>Structure of this tool</HeaderWithAnchor>
+    <HeaderWithAnchor id="structure-of-this-tool" level=2 showAnchor={false}>Structure of this tool</HeaderWithAnchor>
   </summary>
   <p>
     Following the structure of OpenACR, this tool takes you through 7
@@ -106,7 +109,7 @@
 
 <details>
   <summary>
-    <HeaderWithAnchor id="terms" level=2>Terms</HeaderWithAnchor>
+    <HeaderWithAnchor id="terms" level=2 showAnchor={false}>Terms</HeaderWithAnchor>
   </summary>
   <p>
     As you go through and enter conformance for your software, you will select a "term" for

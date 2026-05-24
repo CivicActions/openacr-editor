@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { useLocation } from "svelte-navigator";
   import Header from "./Header.svelte";
   import HelpText from "../components/HelpText.svelte";
   import Criteria from "./Criteria.svelte";
@@ -13,6 +12,7 @@
   import { evaluation } from "../stores/evaluation.js";
   import ExpandCollapseAll from "../components/ExpandCollapseAll.svelte";
   import { getCatalog } from "../utils/getCatalogs.js";
+  import { location } from "../lib/router.js";
 
   export let chapterId = null;
   export let className = undefined;
@@ -20,15 +20,20 @@
   let standards = catalog.standards;
   let chapters = catalog.chapters;
 
-  const location = useLocation();
-  $: currentChapter = chapters.find( ({ id }) => id === chapterId);
-  $: currentChapterKey = chapters.findIndex( ({ id }) => id === chapterId);
-  $: currentStandard = standards.find( ({ chapters }) => chapters.includes(chapterId));
+  $: currentChapter = chapters.find(({ id }) => id === chapterId);
+  $: currentChapterKey = chapters.findIndex(({ id }) => id === chapterId);
+  $: currentStandard = standards.find(({ chapters }) =>
+    chapters.includes(chapterId),
+  );
 
   onMount(() => {
-    currentPage.update(currentPage => "Evaluation");
+    currentPage.update((currentPage) => "Evaluation");
 
-    honourFragmentIdLinks($location);
+    const unsubscribe = location.subscribe((currentLocation) => {
+      honourFragmentIdLinks(currentLocation);
+    });
+
+    return unsubscribe;
   });
 </script>
 
