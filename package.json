@@ -19,7 +19,7 @@
     "svelte-eslint-parser": "^1.6.0",
     "svelte-select": "^5.8.3",
     "tslib": "^2.8.1",
-    "vite": "^8.0.10"
+    "vite": "^8.0.16"
   },
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
